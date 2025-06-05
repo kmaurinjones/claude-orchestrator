@@ -144,10 +144,10 @@ Remember: Interview FIRST, explore SECOND, plan THIRD, setup FOURTH, THEN parall
 
 CRITICAL - ENDING THE PLANNING PHASE:
 When PLAN.md is complete and saved:
-1. Type: exit
+1. Type: /exit
 2. Press: Enter
 3. Do NOT provide summaries or explain next steps
-Just type 'exit' to allow the orchestrator to proceed."""
+Just type '/exit' to terminate this session and allow the orchestrator to proceed."""
 
 WORKSTREAM_PROMPT_TEMPLATE = """You are working on Workstream {id}: {name}
 
@@ -226,7 +226,7 @@ Please:
 
 6. Create a final commit with message "Final integration and review"
 
-When you're satisfied that everything works together properly, exit."""
+When you're satisfied that everything works together properly, type /exit to complete the review."""
 
 # Timing constants
 THREAD_START_DELAY = 2  # seconds between starting threads

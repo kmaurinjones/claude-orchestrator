@@ -67,7 +67,7 @@ class ParallelClaudeOrchestrator:
         
         self.logger.info("Launching Claude Opus 4 for interactive planning session...")
         self.logger.info("Please work with Claude to create your project plan.")
-        self.logger.info("When done, ensure PLAN.md is created and exit Claude.")
+        self.logger.info("When done, ensure PLAN.md is created. Claude will type /exit to proceed.")
         
         # Run interactively - use subprocess with proper stdin/stdout/stderr
         try:
@@ -259,7 +259,7 @@ You are ONLY setting up the skeleton/framework.
 
 CRITICAL - TO COMPLETE THIS PHASE:
 After you commit the base framework changes, you MUST:
-1. Type the word: exit
+1. Type: /exit
 2. Press Enter
 3. Nothing else - no explanations, no summaries
 
@@ -269,10 +269,10 @@ DO NOT:
 - Say "the orchestrator will now..."
 - Provide any summary
 
-JUST TYPE: exit
+JUST TYPE: /exit
 THEN PRESS: Enter
 
-This is required for the orchestrator to proceed."""
+This will terminate the Claude session and allow the orchestrator to proceed."""
         
         cmd.append(setup_prompt)
         
