@@ -219,10 +219,10 @@ class ParallelClaudeOrchestrator:
         self.logger.info(f"Created and checked out branch: {self.work_branch}")
     
     def setup_base_framework(self) -> None:
-        """Setup base framework and dependencies before parallel execution"""
-        self.logger.info("Setting up base framework and dependencies...")
+        """Setup virtual environment and document architecture before parallel execution"""
+        self.logger.info("Setting up environment and documenting architecture...")
         
-        # Give Claude a chance to set up the base framework
+        # Give Claude a chance to set up the environment and architecture
         cmd = get_claude_command() + [
             "--model", OPUS_MODEL
         ]
@@ -230,44 +230,39 @@ class ParallelClaudeOrchestrator:
         if not self.require_permissions:
             cmd.append("--dangerously-skip-permissions")
         
-        setup_prompt = """Review the PLAN.md and set up ONLY the base framework:
+        setup_prompt = """Review the PLAN.md and perform MINIMAL setup tasks:
 
-CRITICAL: You are the SUPERVISOR - DO NOT implement any features from the workstreams!
-Your ONLY job is to create the foundation that workstreams will build upon.
+CRITICAL: You are the ARCHITECT - DO NOT build any code structure!
+Your ONLY job is to set up the environment and document the architecture.
 
+TASKS TO COMPLETE:
 1. Create/activate virtual environment (using uv preferably)
 2. Install ALL project dependencies INCLUDING claude-orchestrator itself:
    - Run: uv add claude-orchestrator
    - This allows the orchestrator to be used within the project environment
-3. Create the base directory structure including:
-   - visuals/ directory for all plots and charts
-   - Any other needed directories
-4. Set up initial configuration files
-5. Create base classes/interfaces that workstreams will use
-6. Establish shared utilities or helpers
-7. If visualization is needed, install matplotlib/seaborn
-8. Commit these base framework changes
+3. Install any other dependencies mentioned in PLAN.md
+4. ADD TO PLAN.md: Create a detailed "## Project Architecture" section that includes:
+   - Complete directory tree structure
+   - File naming conventions
+   - Module organization
+   - Shared interfaces/base classes that workstreams should create
+   - Any architectural decisions the workstreams need to follow
+5. Commit the updated PLAN.md with message "Add project architecture"
 
 DO NOT:
-- Implement any features listed in workstreams
-- Write any business logic
-- Create any functionality beyond base framework
-- Do any tasks assigned to workstreams
+- Create any directories (except virtual environment)
+- Create any code files
+- Implement any base classes or interfaces
+- Write any code at all
 
-The workstream instances will handle ALL implementation work in parallel.
-You are ONLY setting up the skeleton/framework.
+The workstreams will create ALL files and directories based on your architecture plan.
+You are ONLY documenting what they should build.
 
 CRITICAL - TO COMPLETE THIS PHASE:
-After you commit the base framework changes, you MUST:
+After you commit the updated PLAN.md, you MUST:
 1. Type: /exit
 2. Press Enter
 3. Nothing else - no explanations, no summaries
-
-DO NOT:
-- Explain what happens next
-- Wait for user confirmation  
-- Say "the orchestrator will now..."
-- Provide any summary
 
 JUST TYPE: /exit
 THEN PRESS: Enter
@@ -276,7 +271,7 @@ This will terminate the Claude session and allow the orchestrator to proceed."""
         
         cmd.append(setup_prompt)
         
-        self.logger.info("Launching Claude Opus 4 to set up base framework...")
+        self.logger.info("Launching Claude Opus 4 for environment setup and architecture documentation...")
         
         try:
             result = run_claude_command(cmd, self.repo_path, self.logger)
@@ -284,9 +279,9 @@ This will terminate the Claude session and allow the orchestrator to proceed."""
             if result.returncode != 0:
                 self.logger.warning(f"Claude exited with code {result.returncode}")
         except Exception as e:
-            raise RuntimeError(f"Failed to set up base framework: {e}")
+            raise RuntimeError(f"Failed to set up environment and architecture: {e}")
         
-        self.logger.info("Base framework setup complete!")
+        self.logger.info("Environment setup and architecture documentation complete!")
     
     def setup_worktrees(self) -> None:
         """Step 3: Create git worktrees for each workstream"""
@@ -516,10 +511,10 @@ This will terminate the Claude session and allow the orchestrator to proceed."""
             # Step 2: Create work branch
             self.create_work_branch()
             
-            # Step 3: Setup base framework BEFORE creating worktrees
+            # Step 3: Setup environment and document architecture
             self.setup_base_framework()
             
-            # Step 4: Setup worktrees (now that base framework is ready)
+            # Step 4: Setup worktrees (now that architecture is documented)
             self.setup_worktrees()
             
             # Step 5: Execute parallel work with Sonnet

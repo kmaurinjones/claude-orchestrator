@@ -112,18 +112,17 @@ Use the following structure:
 ...
 
 ## Pre-Execution Setup (DO THIS BEFORE PARALLEL WORK BEGINS)
-Once the plan is approved, before ANY parallel execution:
+Once the plan is approved, the setup phase will:
 
 1. **Virtual Environment Setup**:
    - Create/activate virtual environment
    - Install ALL project dependencies
    - Ensure environment is fully configured
 
-2. **Base Framework Creation**:
-   - Create the directory structure
-   - Set up initial configuration files
-   - Create base classes/interfaces that workstreams will use
-   - Establish shared utilities or helpers
+2. **Architecture Documentation**:
+   - A detailed "## Project Architecture" section will be added to PLAN.md
+   - This will include directory structure, file organization, and architectural decisions
+   - Workstreams will follow this architecture when implementing
 
 3. **Git Configuration**:
    - Ensure .gitignore includes:
@@ -131,11 +130,13 @@ Once the plan is approved, before ANY parallel execution:
      - .claude_progress/
      - claude_orchestrator.log
      - Any other orchestrator-specific files
-   - Commit the base framework
+
+Note: The setup phase will NOT create any code files - it only sets up the environment
+and documents the architecture for workstreams to follow.
 
 IMPORTANT ROLE CLARIFICATION:
 - During planning: You are the PLANNER - create the plan, don't implement
-- During setup: You are the ARCHITECT - create framework, don't implement features  
+- During setup: You are the ARCHITECT - document architecture, don't create files  
 - During execution: The WORKSTREAM INSTANCES do ALL implementation work
 
 - During review: You are the INTEGRATOR - merge and polish, don't reimplement
@@ -152,6 +153,15 @@ Just type '/exit' to terminate this session and allow the orchestrator to procee
 WORKSTREAM_PROMPT_TEMPLATE = """You are working on Workstream {id}: {name}
 
 Please check the PLAN.md file to understand the full project context and your specific workstream.
+
+IMPORTANT: The PLAN.md file contains a "## Project Architecture" section that specifies:
+- The exact directory structure to create
+- File naming conventions to follow
+- Module organization patterns
+- Shared interfaces/base classes to implement
+- Architectural decisions to respect
+
+You MUST follow this architecture exactly when creating files and directories.
 
 Your specific tasks are:
 {tasks}

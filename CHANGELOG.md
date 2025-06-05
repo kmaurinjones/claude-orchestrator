@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2025-06-06
+
+### Changed
+- **BREAKING**: Setup phase now only creates virtual environment and documents architecture in PLAN.md
+- Setup phase no longer creates any code files or directory structure
+- Workstreams are responsible for creating all files and directories based on the architecture documentation
+- This significantly speeds up the setup phase and gives workstreams more flexibility
+
+### Added
+- Architecture documentation is now added to PLAN.md during setup phase
+- Workstreams are instructed to follow the documented architecture exactly
+
 ## [0.1.5] - 2025-06-06
 
 ### Fixed
@@ -74,7 +86,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-[unreleased]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.5...HEAD
+[unreleased]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.5...v0.2.0
 [0.1.5]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.2...v0.1.3
