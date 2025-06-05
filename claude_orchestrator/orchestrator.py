@@ -236,7 +236,9 @@ CRITICAL: You are the SUPERVISOR - DO NOT implement any features from the workst
 Your ONLY job is to create the foundation that workstreams will build upon.
 
 1. Create/activate virtual environment (using uv preferably)
-2. Install ALL project dependencies
+2. Install ALL project dependencies INCLUDING claude-orchestrator itself:
+   - Run: uv add claude-orchestrator
+   - This allows the orchestrator to be used within the project environment
 3. Create the base directory structure including:
    - visuals/ directory for all plots and charts
    - Any other needed directories

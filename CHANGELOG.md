@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2025-06-06
+
+### Added
+- Setup phase now installs claude-orchestrator itself in the project's virtual environment
+- This enables recursive usage - projects can call claude-orchestrator from within their own environment without needing global installation
+
 ## [0.1.2] - 2025-06-06
 
 ### Fixed
@@ -54,7 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-[unreleased]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.2...HEAD
+[unreleased]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kmaurinjones/claude-orchestrator/releases/tag/v0.1.0
