@@ -20,7 +20,8 @@ from .constants import (
 )
 from .utils import (
     run_command, parse_workstream_section, ensure_clean_worktree,
-    create_timestamp_suffix, format_duration, get_claude_command
+    create_timestamp_suffix, format_duration, get_claude_command,
+    run_claude_command
 )
 
 
@@ -73,13 +74,7 @@ class ParallelClaudeOrchestrator:
             self.logger.debug(f"Running command: {' '.join(cmd)}")
             
             # Run with inherited stdin/stdout/stderr for proper interaction
-            result = subprocess.run(
-                cmd, 
-                cwd=self.repo_path,
-                stdin=None,  # Use parent's stdin
-                stdout=None, # Use parent's stdout
-                stderr=None  # Use parent's stderr
-            )
+            result = run_claude_command(cmd, self.repo_path, self.logger)
             
             if result.returncode != 0:
                 self.logger.warning(f"Claude exited with code {result.returncode}")
@@ -267,13 +262,7 @@ Type 'exit' when the base setup is complete."""
         self.logger.info("Launching Claude Opus 4 to set up base framework...")
         
         try:
-            result = subprocess.run(
-                cmd, 
-                cwd=self.repo_path,
-                stdin=None,
-                stdout=None,
-                stderr=None
-            )
+            result = run_claude_command(cmd, self.repo_path, self.logger)
             
             if result.returncode != 0:
                 self.logger.warning(f"Claude exited with code {result.returncode}")
@@ -452,13 +441,7 @@ Type 'exit' when the base setup is complete."""
             self.logger.debug(f"Running command: {' '.join(cmd)}")
             
             # Run with inherited stdin/stdout/stderr for proper interaction
-            result = subprocess.run(
-                cmd, 
-                cwd=self.repo_path,
-                stdin=None,  # Use parent's stdin
-                stdout=None, # Use parent's stdout
-                stderr=None  # Use parent's stderr
-            )
+            result = run_claude_command(cmd, self.repo_path, self.logger)
             
             if result.returncode != 0:
                 self.logger.warning(f"Claude exited with code {result.returncode}")

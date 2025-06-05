@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2025-06-06
+
+### Fixed
+- Fixed non-critical MCP error messages (like "Tool closeAllDiffTabs not found") from appearing in output
+- Implemented cross-platform error filtering to suppress harmless Claude Code internal errors while preserving important error messages
+
+## [0.1.1] - 2025-06-06
+
+### Changed
+- Updated author name from "K. Maurin Jones" to "Kai Maurin-Jones" across all project files
+- Updated README to reflect PyPI availability as primary installation method
+
+## [0.1.0] - 2025-06-05
+
 ### Added
 - Automatic git repository initialization when running in a non-git directory
 - Git user configuration during auto-initialization if not already configured
@@ -40,4 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-[unreleased]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/kmaurinjones/claude-orchestrator/releases/tag/v0.1.0

@@ -5,6 +5,9 @@ import sys
 import subprocess
 import logging
 import re
+import threading
+import queue
+import time
 from pathlib import Path
 from typing import List, Optional, Tuple
 
@@ -245,6 +248,106 @@ def create_timestamp_suffix() -> str:
     """Create a timestamp suffix for branch names"""
     from datetime import datetime
     return datetime.now().strftime("%Y%m%d_%H%M%S")
+
+
+def run_claude_command(cmd: List[str], cwd: str, logger: logging.Logger) -> subprocess.CompletedProcess:
+    """
+    Run Claude command with error filtering for non-critical MCP errors
+    
+    Args:
+        cmd: Command list to execute
+        cwd: Working directory
+        logger: Logger instance
+        
+    Returns:
+        CompletedProcess result
+    """
+    
+    # Patterns to filter out
+    non_critical_patterns = [
+        "McpError: MCP error -32602",
+        "Tool closeAllDiffTabs not found",
+        "This error originated either by throwing inside of an async function"
+    ]
+    
+    stderr_lines = []
+    stderr_queue = queue.Queue()
+    
+    def read_stderr(pipe, queue):
+        """Read stderr in a separate thread"""
+        for line in iter(pipe.readline, ''):
+            if line:
+                queue.put(line)
+        pipe.close()
+    
+    # Create process with pipes for stderr
+    process = subprocess.Popen(
+        cmd,
+        cwd=cwd,
+        stdin=sys.stdin,
+        stdout=sys.stdout,
+        stderr=subprocess.PIPE,
+        text=True,
+        bufsize=1,
+        universal_newlines=True
+    )
+    
+    # Start thread to read stderr
+    stderr_thread = threading.Thread(target=read_stderr, args=(process.stderr, stderr_queue))
+    stderr_thread.daemon = True
+    stderr_thread.start()
+    
+    # Process stderr lines while the command runs
+    while True:
+        # Check if process is still running
+        poll_status = process.poll()
+        
+        # Process any stderr lines
+        try:
+            while True:
+                line = stderr_queue.get_nowait()
+                
+                # Check if this is a non-critical error
+                is_non_critical = any(pattern in line for pattern in non_critical_patterns)
+                
+                if not is_non_critical:
+                    # Print critical errors to stderr
+                    sys.stderr.write(line)
+                    sys.stderr.flush()
+                
+                stderr_lines.append(line)
+        except queue.Empty:
+            pass
+        
+        # If process has finished, break
+        if poll_status is not None:
+            # Give a bit of time for final output
+            stderr_thread.join(timeout=0.5)
+            
+            # Process any remaining lines
+            try:
+                while True:
+                    line = stderr_queue.get_nowait()
+                    is_non_critical = any(pattern in line for pattern in non_critical_patterns)
+                    if not is_non_critical:
+                        sys.stderr.write(line)
+                        sys.stderr.flush()
+                    stderr_lines.append(line)
+            except queue.Empty:
+                pass
+            
+            break
+        
+        # Small sleep to avoid busy waiting
+        time.sleep(0.01)
+    
+    # Create a CompletedProcess object
+    return subprocess.CompletedProcess(
+        args=cmd,
+        returncode=process.returncode,
+        stdout=None,
+        stderr=''.join(stderr_lines)
+    )
 
 
 def is_git_clean() -> bool:
