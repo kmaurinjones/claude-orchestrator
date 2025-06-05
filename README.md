@@ -111,8 +111,8 @@ claude-orchestrator
 1. **Git Worktrees**: The tool creates worktrees as siblings to your current directory, so ensure you have write permissions in the parent directory.
 
 2. **Model Names**: The tool uses specific model identifiers:
-   - `claude-opus-4-20250514` (for planning and review)
-   - `claude-sonnet-4-20250514` (for parallel execution)
+   - `opus` (alias for the latest Opus model for planning and review)
+   - `sonnet` (alias to the latest Sonnet model for parallel execution)
    
    These may need updating as new models are released.
 
@@ -175,12 +175,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Future Enhancements
-
-- Resume functionality for interrupted runs
-- Configuration file support (.claude-orchestrator.yaml)
-- Custom model selection via CLI arguments
-- Progress visualization with rich terminal UI
-- Support for different git strategies
-- Integration with CI/CD pipelines
