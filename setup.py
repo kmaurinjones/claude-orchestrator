@@ -20,7 +20,7 @@ with open("claude_orchestrator/__init__.py") as fp:
 setup(
     name="claude-orchestrator",
     version=VERSION,
-    author="K. Maurin Jones",
+    author="Kai Maurin-Jones",
     author_email="kmaurinjones@example.com",
     description="Orchestrate multiple Claude Code instances to work in parallel",
     long_description=long_description,

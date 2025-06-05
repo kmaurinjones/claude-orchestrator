@@ -37,6 +37,16 @@ This approach allows you to leverage AI assistance at scale while maintaining co
 
 ## Installation
 
+### From PyPI
+
+```bash
+# Using pip
+pip install claude-orchestrator
+
+# Using uv (recommended)
+uv pip install claude-orchestrator
+```
+
 ### From Source
 
 ```bash
@@ -46,12 +56,6 @@ cd claude-orchestrator
 
 # Install in development mode
 pip install -e .
-```
-
-### From PyPI (when published)
-
-```bash
-pip install claude-orchestrator
 ```
 
 ## Usage
