@@ -137,9 +137,17 @@ IMPORTANT ROLE CLARIFICATION:
 - During planning: You are the PLANNER - create the plan, don't implement
 - During setup: You are the ARCHITECT - create framework, don't implement features  
 - During execution: The WORKSTREAM INSTANCES do ALL implementation work
+
 - During review: You are the INTEGRATOR - merge and polish, don't reimplement
 
-Remember: Interview FIRST, explore SECOND, plan THIRD, setup FOURTH, THEN parallel execution."""
+Remember: Interview FIRST, explore SECOND, plan THIRD, setup FOURTH, THEN parallel execution.
+
+CRITICAL - ENDING THE PLANNING PHASE:
+When PLAN.md is complete and saved:
+1. Type: exit
+2. Press: Enter
+3. Do NOT provide summaries or explain next steps
+Just type 'exit' to allow the orchestrator to proceed."""
 
 WORKSTREAM_PROMPT_TEMPLATE = """You are working on Workstream {id}: {name}
 

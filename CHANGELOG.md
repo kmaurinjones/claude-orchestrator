@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.4] - 2025-06-06
+
+### Fixed
+- Made exit instructions more explicit in planning and setup phases to prevent Claude from explaining next steps instead of exiting
+- Added clearer "CRITICAL" instructions to ensure Claude types 'exit' to complete each phase
+- This fixes the issue where orchestrator would hang waiting for phase completion
+
 ## [0.1.3] - 2025-06-06
 
 ### Added
@@ -60,7 +67,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-[unreleased]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.3...HEAD
+[unreleased]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/kmaurinjones/claude-orchestrator/compare/v0.1.0...v0.1.1

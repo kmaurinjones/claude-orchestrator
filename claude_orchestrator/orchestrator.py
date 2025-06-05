@@ -257,7 +257,22 @@ DO NOT:
 The workstream instances will handle ALL implementation work in parallel.
 You are ONLY setting up the skeleton/framework.
 
-Type 'exit' when the base setup is complete."""
+CRITICAL - TO COMPLETE THIS PHASE:
+After you commit the base framework changes, you MUST:
+1. Type the word: exit
+2. Press Enter
+3. Nothing else - no explanations, no summaries
+
+DO NOT:
+- Explain what happens next
+- Wait for user confirmation  
+- Say "the orchestrator will now..."
+- Provide any summary
+
+JUST TYPE: exit
+THEN PRESS: Enter
+
+This is required for the orchestrator to proceed."""
         
         cmd.append(setup_prompt)
         
